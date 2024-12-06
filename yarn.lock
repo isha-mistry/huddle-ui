@@ -1272,31 +1272,31 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.2.tgz#d8bae93ac8b815b2bd7a98078cf91e2724ef11e5"
   integrity sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==
 
-"@huddle01/react@^2.0.8":
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/@huddle01/react/-/react-2.0.12.tgz#8c6c1045e0e94f16c4ecf0f917c88128d074f450"
-  integrity sha512-UGh14+HdENAdlJ9nUdtVe6h/ynek/J762Lq7ydDfDlzk7ERXf7FPfn7kZMUMp8EjrYypM+QvkWpRu1yyjrcJqw==
+"@huddle01/react@^2.0.14":
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/@huddle01/react/-/react-2.0.14.tgz#9e8b0ce48469ab9a80eb6b222c6a7027186ffb38"
+  integrity sha512-pjmOg0D73Brxnqbt0bdl4sHDp0QabFhQp37t6hofjHKlCt/HXs2ghj34A5NYR19n1mkbNlbbdg1cjqQyKd5/wQ==
   dependencies:
-    "@huddle01/web-core" "2.0.12"
+    "@huddle01/web-core" "2.0.14"
     "@tanstack/react-query" "^4.32.6"
     "@testing-library/react" "^14.0.0"
     "@testing-library/react-hooks" "^8.0.1"
     axios "^1.6.7"
     react "18.2.0"
 
-"@huddle01/server-sdk@2.1.0-dev.0":
-  version "2.1.0-dev.0"
-  resolved "https://registry.yarnpkg.com/@huddle01/server-sdk/-/server-sdk-2.1.0-dev.0.tgz#9ec9dcb9694be29f2f4e82ab077d02a44a71d588"
-  integrity sha512-J77sMNmS9882gKAf68JnsrxV0Je7a2OHU7l4qXpmjCDPl1op9d4WEssFmCO9HD9x24mnDBw291ufrwgKHXNXSQ==
+"@huddle01/server-sdk@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@huddle01/server-sdk/-/server-sdk-2.2.2.tgz#a088b00bef75e98a0470526649591457a85f21d3"
+  integrity sha512-oi+z6zCaKUcpuS+2sl88EyFuL1Qkqdr1/HJlBOzYRdhbfIDiY2V5hbyQpHEMlDiP5jNzq/5r0ebGDfynaEh8Ow==
   dependencies:
     axios "^1.6.7"
     jose "^4.14.6"
     zod "^3.22.4"
 
-"@huddle01/web-core@2.0.12":
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/@huddle01/web-core/-/web-core-2.0.12.tgz#46f47d703faa261fe6bbd2369d6fed4b6d9d4a35"
-  integrity sha512-1AbA4YrIHFHE/ncH0zOTp1+ztzIucqx39Zq1vtRvuKV5AA2JrTvEgptMTFmZU6WxD105X0y1gDp0BcsxTqhbbA==
+"@huddle01/web-core@2.0.14":
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/@huddle01/web-core/-/web-core-2.0.14.tgz#ad33a4c7e55cca22999b7026771fe8d106e8e982"
+  integrity sha512-qTaofqv6Ssg3CfXn4PftcoYUoLbKAN5gH3hhA4eydzFRgyUNxlg9f/xop9f896ImLcvex8BOvoP8xJcgug8rDQ==
   dependencies:
     mediasoup-client "3.7.6"
     zod "^3.22.1"

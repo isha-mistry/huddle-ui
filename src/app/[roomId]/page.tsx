@@ -32,6 +32,8 @@ import clsx from "clsx";
 import GridContainer from "@/components/GridContainer";
 import ShowCaptions from "@/components/Caption/showCaptions";
 import RemoteScreenShare from "@/components/remoteScreenShare";
+import MainGridLayout from "@/components/MainGridLayout";
+import Camera from "@/components/Media/Camera";
 
 export default function Component({ params }: { params: { roomId: string } }) {
   const { isVideoOn, enableVideo, disableVideo, stream } = useLocalVideo();
@@ -42,6 +44,7 @@ export default function Component({ params }: { params: { roomId: string } }) {
     stream: audioStream,
   } = useLocalAudio();
   const { fetchStream } = useLocalMedia();
+  const [streamNew, setStreamNew] = useState<any>("");
   const { setPreferredDevice: setCamPrefferedDevice } = useDevices({
     type: "cam",
   });
@@ -145,6 +148,29 @@ export default function Component({ params }: { params: { roomId: string } }) {
     }
   }, [audioInputDevice]);
 
+  useEffect(() => {
+    console.log(shareStream);
+  }, [shareStream]);
+
+  useEffect(() => {
+    setStreamNew(videoTrack && new MediaStream([videoTrack]));
+    console.log("videoTrack", videoTrack);
+  }, [videoTrack]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: any) => {
+      const message = "Are you sure you want to leave?";
+      event.returnValue = message; // Standard way to display an alert in modern browsers
+      return message; // For some older browsers
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <div className={clsx("flex flex-col h-screen bg-white")}>
       <header className="flex items-center justify-between pt-4 px-4">
@@ -159,11 +185,12 @@ export default function Component({ params }: { params: { roomId: string } }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <div className="flex space-x-2">
-                <span className="p-2 bg-gray-700/50 rounded-lg">
+                <span className="p-2 bg-gray-200 rounded-lg text-black">
                   {typeof window !== "undefined" &&
                     `http://${window.location.host}/${params.roomId}`}
                 </span>
                 <Button
+                  className="bg-gray-200 hover:bg-gray-300"
                   onClick={() => {
                     if (typeof window === "undefined") return;
                     navigator.clipboard.writeText(
@@ -199,7 +226,7 @@ export default function Component({ params }: { params: { roomId: string } }) {
               <GridContainer className="w-full h-full">
                 <>
                   <Video
-                    stream={videoTrack && new MediaStream([videoTrack])}
+                    stream={streamNew}
                     name={metadata?.displayName ?? "guest"}
                   />
                 </>
@@ -213,14 +240,14 @@ export default function Component({ params }: { params: { roomId: string } }) {
             className={clsx(
               "justify-center px-4",
               isScreenShared
-                ? "flex flex-col w-1/4"
-                : "flex flex-wrap gap-4 w-full"
+                ? "flex flex-col w-1/4 gap-2"
+                : "flex flex-wrap gap-3 w-full"
             )}
           >
             {role !== Role.BOT && (
               <GridContainer
                 className={clsx(
-                  isScreenShared ? "w-full h-full my-3 mx-1" : ""
+                  isScreenShared ? "w-full h-full gap-y-2 mx-1" : "w-[49%]"
                 )}
               >
                 {metadata?.isHandRaised && (
@@ -230,7 +257,7 @@ export default function Component({ params }: { params: { roomId: string } }) {
                 )}
                 {stream ? (
                   <>
-                    <Video
+                    <Camera
                       stream={stream}
                       name={metadata?.displayName ?? "guest"}
                     />
@@ -241,23 +268,28 @@ export default function Component({ params }: { params: { roomId: string } }) {
                   </div>
                 )}
                 <span className="absolute bottom-4 left-4 text-gray-800 font-medium">
-                  {`${metadata?.displayName} (You)`}
+                  {`${metadata?.displayName} (You) ${role}`}
                 </span>
               </GridContainer>
             )}
-            {peerIds.map((peerId) => (
-              <RemotePeer key={peerId} peerId={peerId} />
-            ))}
+            {isScreenShared
+              ? peerIds
+                  .slice(0, 2)
+                  .map((peerId) => <RemotePeer key={peerId} peerId={peerId} />)
+              : peerIds.map((peerId) => (
+                  <RemotePeer key={peerId} peerId={peerId} />
+                ))}
           </section>
+          {/* <MainGridLayout params={params} /> */}
         </div>
         {isChatOpen && <ChatBar />}
         {isParticipantsOpen && <ParticipantsBar />}
       </main>
-      <ShowCaptions
+      {/* <ShowCaptions
         mediaStream={audioStream}
         name={metadata?.displayName}
         localPeerId={peerId}
-      />
+      /> */}
       <BottomBar />
     </div>
   );

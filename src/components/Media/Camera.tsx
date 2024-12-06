@@ -6,13 +6,13 @@ interface VideoProps {
   name: string;
 }
 
-const Video = ({ stream, name }: VideoProps) => {
+const Camera = ({ stream, name }: VideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { isRecordVideo } = useStudioState();
 
   useEffect(() => {
     const videoObj = videoRef.current;
-    console.log("stream", stream);
+
     if (videoObj && stream) {
       videoObj.srcObject = stream;
       videoObj.onloadedmetadata = async () => {
@@ -29,7 +29,7 @@ const Video = ({ stream, name }: VideoProps) => {
   return (
     <>
       <video
-        className="h-full w-full rounded-lg"
+        className="h-full w-full rounded-lg object-cover object-center"
         ref={videoRef}
         autoPlay
         muted
@@ -38,4 +38,4 @@ const Video = ({ stream, name }: VideoProps) => {
   );
 };
 
-export default Video;
+export default Camera;

@@ -5,6 +5,7 @@ export const createRoom = async () => {
     method: "POST",
     body: JSON.stringify({
       title: "Huddle01 Room",
+      hostWallets: ["0xB351a70dD6E5282A8c84edCbCd5A955469b9b032"],
     }),
     headers: {
       "Content-type": "application/json",
